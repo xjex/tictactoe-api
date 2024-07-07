@@ -2,9 +2,28 @@ import LogComponent from "../models/log.model.js";
 
 const createLog = async (req, res) => {
   try {
-    const { playerX, playerO, games } = req.body;
-    const newLog = new LogComponent({ playerX, playerO, games });
+    const { playerX, playerO, games, stats, rounds } = req.body;
+
+    if (
+      !playerX ||
+      !playerO ||
+      !games ||
+      !stats ||
+      typeof rounds !== "number"
+    ) {
+      return res.status(400).json({ error: "Missing required fields" });
+    }
+
+    const newLog = new LogComponent({
+      playerX,
+      playerO,
+      games,
+      stats,
+      rounds,
+    });
+
     const savedLog = await newLog.save();
+
     res.status(201).json(savedLog);
   } catch (err) {
     res.status(400).json({ error: err.message });

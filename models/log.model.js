@@ -19,6 +19,28 @@ const logComponentSchema = new mongoose.Schema({
     default: Date.now,
     required: true,
   },
+  stats: {
+    playerXWins: {
+      type: Number,
+      default: 0,
+      required: true,
+    },
+    playerOWins: {
+      type: Number,
+      default: 0,
+      required: true,
+    },
+    draws: {
+      type: Number,
+      default: 0,
+      required: true,
+    },
+  },
+  rounds: {
+    type: Number,
+    default: 0,
+    required: true,
+  },
 });
 
 const LogComponent = mongoose.model("Logs", logComponentSchema);
